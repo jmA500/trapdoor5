@@ -1,0 +1,42 @@
+Name     CBR5SEL;
+PartNo   01 ;
+Date     06.03.2020 ;
+Revision 02;
+Designer jmA500 ;
+Company  privat ;
+Assembly TRAPDOOR ;
+Location Earth ;
+Device   G16V8;
+
+/* *************** INPUT PINS *********************/
+PIN 1 = REFRESH_delay;
+PIN 2 = NRAS_delay;
+
+PIN 5 = RAS0_IN;
+PIN 6 = RAS1_IN; 
+PIN 7 = CASL_IN; 
+PIN 8 = CASU_IN;
+
+PIN 3 = SEL1;
+PIN 4 = SEL0;
+
+/* *************** OUTPUT PINS *********************/
+PIN 12 = CASL;
+PIN 13 = CASU;  
+PIN 14 = RAS; 
+PIN 15 = A9;
+
+PIN 19 = REFRESH;
+PIN 18 = RAS_out;
+
+REFRESH = !RAS0_IN & !RAS1_IN;
+
+!CASL = !CASL_IN # !RAS0_IN & !RAS1_IN;
+!CASU = !CASU_IN # !RAS0_IN & !RAS1_IN;
+
+!RAS = !RAS1_IN & RAS0_IN # REFRESH_delay;
+
+RAS_out = !RAS1_IN & RAS0_IN;
+A9 = SEL1 & NRAS_delay # SEL0 & !NRAS_delay;
+
+

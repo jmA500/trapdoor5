@@ -1,0 +1,49 @@
+Name     CBR5EX;
+PartNo   01 ;
+Date     06.03.2020 ;
+Revision 05 ;
+Designer jmA500 ;
+Company  privat ;
+Assembly TRAPDOOR5 ;
+Location Earth ;
+Device   G16V8;
+
+/* *************** INPUT PINS *********************/
+PIN 5 = RAS0_IN;
+PIN 6 = RAS1_IN; 
+PIN 7 = CASL_IN; 
+PIN 8 = CASU_IN;
+PIN 9 = A9_in;
+
+/* PIN 4 = A9_from_delay;   Modifizierte Platine */ 
+PIN 2 = A9_from_delay; /* nicht modifizierte Platine */
+PIN 1 = REFRESH_delay;
+
+/* *************** OUTPUT PINS *********************/
+PIN 12 = CASL;
+PIN 13 = CASU;  
+PIN 14 = RAS; 
+PIN 15 = A9_out;
+PIN 18 = A9_to_delay;
+
+PIN 19 = REFRESH;
+
+PIN 17 = RAS_act;
+
+/* equations */
+
+/* This detects the refresh, used to delay the RAS at refresh */
+REFRESH = !RAS0_IN & !RAS1_IN;
+
+/* This detects the regular RAS activity */
+!RAS_act = !RAS1_IN & RAS0_IN;
+
+/* first term removes glitch at refresh, when RAS0_IN is delayed wrt RAS1_IN */
+!RAS = !RAS_act & RAS0_IN # REFRESH_delay;
+
+/* CASx goes low on CASx_IN low, or when Refresh detected */
+!CASL = !CASL_IN # !RAS0_IN & !RAS1_IN;
+!CASU = !CASU_IN # !RAS0_IN & !RAS1_IN;
+
+A9_to_delay = A9_in;
+A9_out = A9_from_delay;
