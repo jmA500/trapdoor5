@@ -1,0 +1,64 @@
+Name     GARY4 ;
+PartNo   00 ;
+Date     06.03.2020 ;
+Revision 04 ;
+Designer jmA500 ;
+Company  privat ;
+Assembly Trapdoor ;
+Location Potsdam ;
+Device   G16V8AS ;
+
+/* Inputs */
+PIN [2..7] = [a23..a18];
+
+PIN  8 = NBLIT;
+PIN 13 = NEXRAM;
+PIN 12 = CCK;
+PIN 11 = CCKQ;
+
+/* Input from Configuration Jumper */
+PIN  9 = NCHIPRAM_SW;
+PIN 19 = NCONF0;
+PIN  1 = NCONF1;
+
+/* Outputs */
+PIN 15 = a19_agnus;
+PIN 16 = a19_out;
+PIN 17 = a20_out;
+PIN 14 = da9_out;
+PIN 18 = sel1;
+
+/* Relevant address ranges */
+addr_08 = (!a23 & !a22 & !a21 & !a20 &  a19);
+addr_C0 = ( a23 &  a22 & !a21 & !a20 & !a19);
+addr_C8 = ( a23 &  a22 & !a21 & !a20 &  a19);
+addr_D0 = ( a23 &  a22 & !a21 &  a20 & !a19);
+addr_D8 = ( a23 &  a22 & !a21 &  a20 &  a19 & !a18);
+
+bank0 = addr_C0 & NBLIT; 
+bank1 = addr_C8 & NBLIT;
+bank2 = addr_D0 & NBLIT;
+bank3 = (addr_D8 & NCHIPRAM_SW) # (addr_08 & !NCHIPRAM_SW) # (!NBLIT & !NCHIPRAM_SW); 
+
+/* first product term selects bank0 or bank 2 */
+da9_out =   bank0 & !CCKQ 
+	   # bank2 & !CCKQ
+	   # sel1 & CCKQ;
+
+/* sel1 selects bank0 or bank 1 */
+sel1 =   bank0 & CCK 
+	# bank1 & CCK
+	# sel1 & CCK 
+	# sel1 & CCKQ; 
+
+a19_agnus = a23 # (a19 & !NCHIPRAM_SW);
+
+!a19_out =   !a19 
+           # addr_C8 & !NCONF0 & !NEXRAM & NCHIPRAM_SW 
+           # addr_C8 & !NCONF1 & !NEXRAM 
+           # addr_D8 & !NCONF0 & !NCONF1 & !NEXRAM & NCHIPRAM_SW;
+
+!a20_out =   !a20 
+           # addr_D0 & !NCONF1 & NCHIPRAM_SW & !NEXRAM 
+	    # addr_D0 & !NCONF1 & !NCONF0 & !NEXRAM
+           # addr_D8 & !NCONF0 & !NCONF1 & !NEXRAM & NCHIPRAM_SW;

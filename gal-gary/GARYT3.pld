@@ -1,0 +1,55 @@
+Name     GARY-T3 ;
+PartNo   01 ;
+Date     06.03.2020 ;
+Revision 03 ;
+Designer jmA500 ;
+Company  Privat;
+Assembly Trapdoor Memory Expansion;
+Location Earth ;
+Device   G16V8;
+
+/* Inputs */
+PIN [2..7] = [a23..a18];
+
+PIN 8 =  NBLIT;
+PIN 9 =  NEXRAM;
+PIN 1 =  CCK;
+
+/* Input from Configuration Jumper */
+PIN 14 = NCHIPRAM_SW;
+PIN 12 = NCONF0;
+PIN 13 = NCONF1;
+
+/* Outputs */
+PIN 15 = a19_agnus;
+PIN 16 = a19_out;
+PIN 17 = a20_out;
+PIN 18 = sel0;
+PIN 19 = sel1;
+
+/* Relevant address ranges */
+addr_08 = (!a23 & !a22 & !a21 & !a20 &  a19);
+addr_C0 = ( a23 &  a22 & !a21 & !a20 & !a19);
+addr_C8 = ( a23 &  a22 & !a21 & !a20 &  a19);
+addr_D0 = ( a23 &  a22 & !a21 &  a20 & !a19);
+addr_D8 = ( a23 &  a22 & !a21 &  a20 &  a19 & !a18);
+
+bank0 = (addr_C0 & NCHIPRAM_SW) # (addr_08 & !NCHIPRAM_SW) # (!NBLIT & !NCHIPRAM_SW);
+bank1 = (addr_C8 & NCHIPRAM_SW) # (addr_C0 & !NCHIPRAM_SW & NBLIT);
+bank2 = (addr_D0 & NCHIPRAM_SW) # (addr_C8 & !NCHIPRAM_SW & NBLIT);
+bank3 = (addr_D8 & NCHIPRAM_SW) # (addr_D0 & !NCHIPRAM_SW & NBLIT);
+
+sel0.d = bank1 # bank3;
+sel1.d = bank2 # bank3;
+
+a19_agnus = a23 # (a19 & !NCHIPRAM_SW);
+
+!a19_out =   !a19 
+           # addr_C8 & !NCONF0 & !NEXRAM & NCHIPRAM_SW 
+           # addr_C8 & !NCONF1 & !NEXRAM 
+           # addr_D8 & !NCONF0 & !NCONF1 & !NEXRAM & NCHIPRAM_SW;
+
+!a20_out =   !a20 
+           # addr_D0 & !NCONF1 & NCHIPRAM_SW & !NEXRAM 
+	   # addr_D0 & !NCONF1 & !NCONF0 & !NEXRAM
+           # addr_D8 & !NCONF0 & !NCONF1 & !NEXRAM & NCHIPRAM_SW;
