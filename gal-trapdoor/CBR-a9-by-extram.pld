@@ -11,8 +11,8 @@ Device   G16V8;
 /* *************** INPUT PINS *********************/
 PIN 5 = RAS0_IN;
 PIN 6 = RAS1_IN; 
-PIN 7 = CASL_IN; 
-PIN 8 = CASU_IN;
+PIN 7 = CASU_IN; 
+PIN 8 = CASL_IN;
 PIN 9 = A9_in;
 
 /* PIN 4 = A9_from_delay;   Modifizierte Platine */ 
@@ -20,15 +20,13 @@ PIN 2 = A9_from_delay; /* nicht modifizierte Platine */
 PIN 1 = REFRESH_delay;
 
 /* *************** OUTPUT PINS *********************/
-PIN 12 = CASL;
-PIN 13 = CASU;  
-PIN 14 = RAS; 
-PIN 15 = A9_out;
+PIN 13 = RAS_act;
+PIN 14 = CASL;  
+PIN 15 = CASU;
+PIN 16 = RAS; 
+PIN 17 = A9_out;
 PIN 18 = A9_to_delay;
-
 PIN 19 = REFRESH;
-
-PIN 17 = RAS_act;
 
 /* equations */
 

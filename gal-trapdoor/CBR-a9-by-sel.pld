@@ -14,20 +14,20 @@ PIN 2 = NRAS_delay;
 
 PIN 5 = RAS0_IN;
 PIN 6 = RAS1_IN; 
-PIN 7 = CASL_IN; 
-PIN 8 = CASU_IN;
+PIN 7 = CASU_IN; 
+PIN 8 = CASL_IN;
 
 PIN 3 = SEL1;
 PIN 4 = SEL0;
 
 /* *************** OUTPUT PINS *********************/
-PIN 12 = CASL;
-PIN 13 = CASU;  
-PIN 14 = RAS; 
-PIN 15 = A9;
+PIN 14 = CASL;
+PIN 15 = CASU;  
+PIN 16 = RAS; 
+PIN 17 = A9;
 
-PIN 19 = REFRESH;
 PIN 18 = RAS_out;
+PIN 19 = REFRESH;
 
 REFRESH = !RAS0_IN & !RAS1_IN;
 
