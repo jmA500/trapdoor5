@@ -976,7 +976,7 @@ Entry Wire Line
 Entry Wire Line
 	2550 4800 2650 4700
 Wire Bus Line
-	4500 3250 3300 3250
+	4500 2950 4450 3000
 NoConn ~ 1500 4900
 Entry Wire Line
 	2400 5100 2300 5000
@@ -1061,21 +1061,9 @@ Wire Bus Line
 Wire Bus Line
 	2650 3050 2700 3000
 Wire Bus Line
-	2700 3000 3200 3000
-Wire Bus Line
-	3200 3000 3250 3050
-Wire Bus Line
 	3950 800  4000 750 
-Wire Bus Line
-	4000 750  6200 750 
-Wire Bus Line
-	3300 3250 3250 3200
-Wire Bus Line
-	3250 3050 3250 3200
 Text Notes 3650 7650 0    100  ~ 0
 Optional: Clock
-Text Notes 6500 650  0    100  ~ 0
-Lower Byte
 Text Notes 2250 700  0    50   ~ 0
 Pull-Ups on Data Lines \nare optional
 $Comp
@@ -1967,6 +1955,12 @@ Text Label 4600 2200 0    50   ~ 0
 A1
 Entry Wire Line
 	4500 2300 4600 2200
+Wire Bus Line
+	2700 3000 4450 3000
+Wire Bus Line
+	6200 800  6150 750 
+Wire Bus Line
+	6150 750  4000 750 
 Wire Wire Line
 	2100 4700 3000 4700
 Wire Bus Line
@@ -1976,9 +1970,9 @@ Wire Bus Line
 Wire Bus Line
 	2750 5900 2750 7250
 Wire Bus Line
-	4500 1400 4500 3250
+	4500 1400 4500 2950
 Wire Bus Line
 	3950 800  3950 2800
 Wire Bus Line
-	6200 750  6200 2800
+	6200 800  6200 2800
 $EndSCHEMATC
