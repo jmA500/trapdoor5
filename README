@@ -1,0 +1,31 @@
+This repository contains all the files to construct a Trapddor
+expansion for the Amiga 500. There are some variants available. For
+more information see the project website:
+
+     https://www.jm27.de/for-commodore-amiga-500-1-8-mb-2mb-trapdoor-memory-expansion/
+
+One variant uses a universal GARY Adapter (T3), the second one a
+spcialized GARY adapter (T4). The T3 variant has as a main benefit
+that the GARY adapter can be used with other original memory expansion
+boards using a 74'139 to multiplex the CAS lines. The T4 version's
+main feature is that there is no exra connection needed between the
+GARY adapter and the Trapdoor board. 
+
+Directories:
+
+- doc: some documentation, needs to be extended
+
+- pcb-trapdoor: kicad files for the pcb for the trapdoor assembly,
+  both variants
+- gal-trapdoor: Source and JED files for the GAL used on the trapdoor board
+  CBR5SEL is needed for the T3 variant of the GARY adapter,
+  CBR5EX is for the T4 variant
+-pcb-gary-sel: the T3 GARY adater, kicad files
+-pcb-gary-ext: the T4 GARY adapter, kicad files
+
+- gal-gary: the corresponding GAL files
+  GARY-T3: for the T3 variant
+  GARY-T4: for the T4 variant
+
+The PLD files can be compiled with WinCUPL available from Microchip. I
+would be grateful fo a suggestion of a free alternative.
