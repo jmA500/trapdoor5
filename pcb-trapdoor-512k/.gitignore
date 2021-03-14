@@ -1,0 +1,9 @@
+*.xml
+*.net
+*.bak
+*-bak
+*.bck
+*-cache.lib
+Gerber/*.gbr
+Gerber/*.plt
+Gerber/*.drl
